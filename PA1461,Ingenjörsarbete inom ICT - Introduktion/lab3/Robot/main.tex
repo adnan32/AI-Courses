@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{beramono}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\title{Ingenjörsarbete inom ICT}
+\author{Grupp 12}
+\date{December 2020}
+
+\newcommand\realnumberstyle[1]{}
+
+\makeatletter 
+\makeatother 
+
+\lstset{
+    aboveskip=0cm,
+    stringstyle=\ttfamily,
+    showstringspaces = false,
+    basicstyle=\scriptsize\ttfamily,
+    commentstyle=\color{gray!45},
+    keywordstyle=\bfseries,
+    ndkeywordstyle=\bfseries,
+    identifierstyle=\ttfamily,
+    numbers=left,
+    numbersep=15pt,
+    numberstyle=\tiny,
+    numberfirstline = false,
+    breaklines=true
+}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, const, let, async, await, if, in, while, do, else, case, break, from},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\date{06-12-2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.73611in,height=1.73611in]{bth}
+
+    \includegraphics[width=5.00000in,height=3.75000in]{robot}
+\end{figure}
+
+\newpage
+
+\section{Gruppmedlemmar:}
+{\setlength{\parindent}{0cm}
+
+1. Adnan Altukleh: Civilingenjör i AI
+     
+2. Hasan Kassar: Civilingenjör i mjukvaruutveckling
+    
+3. Rasmus Johansson: Civilingenjör i mjukvaruutveckling
+    
+4. Sebastian Bengtsson: Civilingenjör i AI
+}
+
+\section{Arbetsuppdelning}
+{\setlength{\parindent}{0cm}
+
+Andnan ansvarade för kodning
+
+Alla kom med idéer och förslag på förbättringssätt att lösa momenten.
+
+En kort beskrivning av gruppens medlemmar på framsidan (namn, vilket
+program ni läser och vem som gjorde vad i gruppen).
+
+• En kort beskrivning av lösningarna till del1--3, hur ni itererat och
+strukturerat dem.
+
+• En reflektion över gruppens arbetssätt.
+
+• All kod ni skrivit i uppgiften.
+}
+
+\section{Förklaring}
+{\setlength{\parindent}{0cm}
+\textbf{Del 1}
+
+Roboten kör framåt till linjen sen läser den av när den är i mitten av linjen med hjälp av ljusreflektion och fortsätter köra fram tills värdet på ljusreflektioner är 20 procent. Detta innebär att roboten ligger vid en sväng och ska utföra det. Roboten kör bakåt i 1,75 sekunder sedan kör den framåt med lite sväng och upprepar det tills roboten ligger på mitten av linjen efter svängen.\newline
+}\newline
+{\setlength{\parindent}{0cm}
+\textbf{Del 2}
+}\newline
+Roboten kör framåt till linjen sen läser den av när den är i mitten av linjen med hjälp av ljusreflektion och fortsätter köra framåt tills den befinner sig 8 cm bort från hindret. Sedan utgör den en sväng till höger och kör framåt i 1.5 sekund med hastighet 20 procent  sedan svänger vänster och kör framåt i 3 sekund med hastighet 23 procent sedan svänger vänster och kör framåt  1.5 sekund med hastighet 20 procent och till slut svänger den höger. Där är roboten tillbaka på linje och befinner sig bakom hindret.
+\newline
+
+{\setlength{\parindent}{0cm}
+\textbf{Del 3}
+}\newline
+lösningen är samma som på del två fast med lägre hastighet så att mötespunkten ligger i mitten av sträckan. Roboten kör framåt till linjen sen läser den av när den är i mitten av linjen med hjälp av ljusreflektion och fortsätter köra framåt tills den befinner sig 8 cm bort från den mötande bilen. Sedan utgör den en sväng till höger och kör framåt i 1.5 sekund med hastighet 20 procent  sedan svänger vänster och kör framåt i 3 sekund med hastighet 23 procent sedan svänger vänster och kör framåt 1.5 sekund med hastighet 20 procent och till slut svänger den höger. Där är roboten tillbaka på linje och befinner sig bakom bilen.\newline
+
+{\setlength{\parindent}{0cm} \textbf{Reflektion}
+}\newline
+Under påkörningen av del 1 av laborationen insågs det att LEGOroboten hade ett problem med ljussensorn. Detta problem var att sensorn lår för långt ifrån banan, detta ledde till att sensorn hade inte möjligheten att beräkna reflektionen från banan och gav fel reflektions procent. Detta i sin tur ledde till att roboten tog längre tid på sig att reagera mot ändringen i banan. Detta problem löstes genom att sätta större värde på reflektion sensitiviteten så att roboten reagerade snabbare. Vi utförde många test och byggde koden efter hur roboten reagerade under de testerna tills roboten klarade uppmaningen. Den svåraste delen var att man kände inte igen hur LEGO koden fungerade och vad som gör vad. Detta ledde till att  det som tog mest tid var att lär sig de olika kod delar och vad de gör för att kunna utföra uppgiften.     
+
+\section{Kod}
+{\setlength{\parindent}{0cm}
+\textbf{Del 1 och 2}
+}\newline
+
+\begin{lstlisting}[language=JavaScript, numbers=left]
+music.playSoundEffect(sounds.communicationGo)
+
+motors.largeBC.run(20, 2, MoveUnit.Seconds)
+
+forever(function () \{
+
+if (sensors.color3.light(LightIntensityMode.Reflected) \textless{}= 5)
+\{
+
+motors.largeBC.run(20)
+
+\}
+
+if (sensors.color3.light(LightIntensityMode.Reflected) \textgreater{}=
+7) \{
+
+motors.largeBC.steer(20, 10)
+
+\}
+
+if (sensors.color3.light(LightIntensityMode.Reflected) \textgreater{}=
+9) \{
+
+motors.largeBC.steer(-10, 10)
+
+\}
+
+if (sensors.color3.light(LightIntensityMode.Reflected) \textgreater{}=
+20) \{
+
+motors.largeBC.tank(-10, -10, 1.75, MoveUnit.Seconds)
+
+motors.largeBC.steer(118, 10, 1, MoveUnit.Seconds)
+
+\}
+
+if (sensors.ultrasonic2.distance() \textless{}= 8) \{
+
+motors.largeBC.stop()
+
+motors.largeBC.tank(18, -18, 1, MoveUnit.Seconds)
+
+motors.largeBC.steer(0, 20, 1.5, MoveUnit.Seconds)
+
+motors.largeBC.tank(-18, 18, 1, MoveUnit.Seconds)
+
+motors.largeBC.steer(0, 22, 3, MoveUnit.Seconds)
+
+motors.largeBC.tank(-18, 18, 1, MoveUnit.Seconds)
+
+motors.largeBC.steer(0, 20, 1.5, MoveUnit.Seconds)
+
+motors.largeBC.tank(18, -18, 1, MoveUnit.Seconds)
+
+\}
+
+\})
+
+\end{lstlisting}
+
+{\setlength{\parindent}{0cm}
+\textbf{Del 3}\newline
+}
+
+\begin{lstlisting}[language=JavaScript, numbers=left]
+music.playSoundEffect(sounds.communicationGo)
+motors.largeBC.run(12, 2, MoveUnit.Seconds)
+forever(function () {
+   if (sensors.color3.light(LightIntensityMode.Reflected) <= 5) {
+       motors.largeBC.run(12)
+   }
+   if (sensors.color3.light(LightIntensityMode.Reflected) >= 7) {
+       motors.largeBC.steer(20, 10)
+   }
+   if (sensors.color3.light(LightIntensityMode.Reflected) >= 9) {
+       motors.largeBC.steer(-10, 10)
+   }
+   if (sensors.color3.light(LightIntensityMode.Reflected) >= 20) {
+       motors.largeBC.tank(-10, -10, 1.75, MoveUnit.Seconds)
+       motors.largeBC.steer(118, 10, 1, MoveUnit.Seconds)
+   }
+   if (sensors.ultrasonic4.distance() <= 10) {
+       motors.largeBC.stop()
+       motors.largeBC.tank(18, -18, 1, MoveUnit.Seconds)
+       motors.largeBC.steer(0, 20, 2, MoveUnit.Seconds)
+       motors.largeBC.tank(-18, 18, 1, MoveUnit.Seconds)
+       motors.largeBC.steer(0, 22, 1.5, MoveUnit.Seconds)
+       motors.largeBC.tank(-18, 18, 1, MoveUnit.Seconds)
+       motors.largeBC.steer(0, 20, 2, MoveUnit.Seconds)
+       motors.largeBC.tank(18, -18, 1, MoveUnit.Seconds)
+   }
+})
+
+\end{lstlisting}
+
+\end{document}
