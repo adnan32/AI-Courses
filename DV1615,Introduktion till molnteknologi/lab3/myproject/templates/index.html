@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bildsök</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bildsök i Lagret</h1>
+        <form class="" action="" method="GET">
+            <label>URL: </label>
+            <input type="text" name="image-url" value="{{ image_url }}" />
+            <input type="submit" value="Sök" />
+        </form>
+
+        {% if image_url %}
+            <h2>Sökte på: {{ image_url }}</h2>
+        {% endif %}
+
+        {% for cake in cakes %}
+            <p>{{ cake.name }} - {{ cake. price }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
